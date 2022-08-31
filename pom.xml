@@ -38,6 +38,11 @@
 	</issueManagement>
 
 	<modules>
+		<module>shoory-framework-starter-api</module>
+		<module>shoory-framework-starter-auth-jwt</module>
+		<module>shoory-framework-starter-db</module>
+		<module>shoory-framework-starter-service</module>
+		<module>shoory-framework-starter-utils</module>
 	</modules>
 
 	<properties>
