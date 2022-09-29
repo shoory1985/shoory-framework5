@@ -19,10 +19,10 @@ public class BaseResponse {
 	public static final String ERROR_INVALID_PARAMETERS = "ERROR_INVALID_PARAMETERS";
 	public static final String ERROR_OPERATION_FORBIDDEN = "ERROR_OPERATION_FORBIDDEN";
 	
-	@Schema(name = "响应代码", example = "SUCCESS")
+	@Schema(title = "响应代码", example = "SUCCESS")
 	private String code = "SUCCESS";
 
-	@Schema(name = "响应消息", example = "")
+	@Schema(title = "响应消息", example = "")
 	private String message;
 	
 	@JsonIgnore
