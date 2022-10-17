@@ -42,7 +42,7 @@ public class JwtAspect {
 	public Object doAround(ProceedingJoinPoint joinPoint, RequirePermission requirePermission) throws Throwable {
 		//拣出JWT
 		ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-		String token = attributes.getRequest().getHeader("Authorization");
+		String token = attributes.getRequest().getHeader("authorization");
 		if (StringUtils.isBlank(token)) {
 			throw new BizException(AuthorizedResponse.ERROR_ACCESS_TOKEN_MISSED);
 		}
