@@ -25,9 +25,7 @@ public class BizExceptionHandler {
 		BaseResponse response = new BaseResponse();
 		response.setCode(bizException.getCode());
 
-		if (bizException.getMessage() == null) {
-			response.setMessage(bizException.getCode());
-		} else if (StringUtils.isNotBlank(bizException.getMessage())) {
+		if (StringUtils.isNotBlank(bizException.getMessage())) {
 			response.setMessage(bizException.getMessage());
 		} else {
 			response.setMessage(Optional.ofNullable(i18nComponent.getMessage(response.getCode(), "zh_CN"))
