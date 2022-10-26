@@ -24,10 +24,9 @@ public class BizExceptionHandler {
 	public ResponseEntity<BaseResponse> handleServiceException(BizException bizException) {
 		BaseResponse response = new BaseResponse();
 		response.setCode(bizException.getCode());
+		response.setCode(bizException.getMessage());
 
-		if (StringUtils.isNotBlank(bizException.getMessage())) {
-			response.setMessage(bizException.getMessage());
-		} else {
+		if (response.getMessage().equals(response.getCode())) {
 			response.setMessage(Optional.ofNullable(i18nComponent.getMessage(response.getCode(), "zh_CN"))
 					.orElse(response.getCode()));
 		}
