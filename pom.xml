@@ -43,6 +43,8 @@
 		<module>shoory-framework-starter-db</module>
 		<module>shoory-framework-starter-service</module>
 		<module>shoory-framework-starter-utils</module>
+		<module>shoory-framework-starter-oss</module>
+		<module>shoory-framework-starter-oss-minio</module>
 	</modules>
 
 	<properties>
