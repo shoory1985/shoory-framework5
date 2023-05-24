@@ -15,15 +15,13 @@ import java.security.NoSuchAlgorithmException;
 
 @Component
 public class MinioComponent implements OssComponent {
-	@Value("${oss.minio.bucket.name}")
-	public String bucketName;
 
 	@Autowired
 	private MinioClient client;
 
-	public String upload(String path, String mimeType, InputStream is) {
+	public String upload(String bucketName, String path, String mimeType, InputStream is) {
 		try {
-			client.putObject(this.bucketName, path, is, mimeType);
+			client.putObject(bucketName, path, is, mimeType);
 			return path;
 		} catch (InvalidKeyException | InvalidBucketNameException | NoSuchAlgorithmException | InsufficientDataException
 				| NoResponseException | ErrorResponseException | InternalException | InvalidArgumentException
@@ -34,9 +32,9 @@ public class MinioComponent implements OssComponent {
 		}
 	}
 
-	public InputStream download(String resourcePath) {
+	public InputStream download(String bucketName, String resourcePath) {
 		try {
-			return client.getObject(this.bucketName, resourcePath);
+			return client.getObject(bucketName, resourcePath);
 		} catch (InvalidKeyException | InvalidBucketNameException | NoSuchAlgorithmException | InsufficientDataException
 				| NoResponseException | ErrorResponseException | InternalException | InvalidArgumentException
 				| IOException | XmlPullParserException e) {
@@ -46,10 +44,10 @@ public class MinioComponent implements OssComponent {
 		return null;
 	}
 
-	public void delete(String resourcePath) {
+	public void delete(String bucketName, String resourcePath) {
 		// 指定要删除的 bucket 和对象键
 		try {
-			client.removeObject(this.bucketName, resourcePath);
+			client.removeObject(bucketName, resourcePath);
 		} catch (InvalidKeyException | InvalidBucketNameException | NoSuchAlgorithmException | InsufficientDataException | NoResponseException | ErrorResponseException | InternalException | IOException | XmlPullParserException | InvalidArgumentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -57,10 +55,10 @@ public class MinioComponent implements OssComponent {
 	}
 
 	@Override
-	public boolean isExisted(String resourcePath) {
+	public boolean isExisted(String bucketName, String resourcePath) {
 		// TODO Auto-generated method stub
 		try {
-			return client.getObject(this.bucketName, resourcePath) != null;
+			return client.getObject(bucketName, resourcePath) != null;
 		} catch (InvalidKeyException | InvalidBucketNameException | NoSuchAlgorithmException | InsufficientDataException
 				| NoResponseException | ErrorResponseException | InternalException | InvalidArgumentException
 				| IOException | XmlPullParserException e) {
