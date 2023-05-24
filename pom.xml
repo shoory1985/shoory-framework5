@@ -45,6 +45,7 @@
 		<module>shoory-framework-starter-utils</module>
 		<module>shoory-framework-starter-oss</module>
 		<module>shoory-framework-starter-oss-minio</module>
+		<module>shoory-framework-starter-redis</module>
 	</modules>
 
 	<properties>
