@@ -1,5 +1,6 @@
 package com.shoory.framework.starter.api.request;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -13,7 +14,7 @@ import lombok.Data;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class BaseRequest {
+public class BaseRequest implements Serializable {
 	@Schema(title = "语言", description = "默认zh_CN", example = "zh_CN", defaultValue = "zh_CN")
 	private String lang = "zh_CN";
 	
