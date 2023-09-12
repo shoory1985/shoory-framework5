@@ -11,4 +11,5 @@ import java.lang.annotation.Target;
 @Documented
 public @interface RequirePermission {
 	String[] value() default {};
+	String header() default "authorization";
 }
