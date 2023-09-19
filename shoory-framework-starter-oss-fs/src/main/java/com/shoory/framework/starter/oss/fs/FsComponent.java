@@ -6,6 +6,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class FsComponent implements OssComponent {
@@ -59,7 +63,7 @@ public class FsComponent implements OssComponent {
 
 	public InputStream download(String prefix, String path) {
 		try {
-			File file = new File(basePath + prefix + path);
+			File file = new File(basePath + prefix + "/" + path);
 
 			return new FileInputStream(file);
 		} catch (Throwable e) {
@@ -72,7 +76,7 @@ public class FsComponent implements OssComponent {
 	public void delete(String prefix, String path) {
 		// 指定要删除的 bucket 和对象键
 		try {
-			File file = new File(basePath + prefix + path);
+			File file = new File(basePath + prefix + "/" + path);
 			if (file.exists()) {
 				file.delete();
 			}
@@ -86,11 +90,21 @@ public class FsComponent implements OssComponent {
 	public boolean isExisted(String prefix, String path) {
 		// TODO Auto-generated method stub
 		try {
-			File file = new File(basePath + prefix + path);
+			File file = new File(basePath + prefix + "/" + path);
 			return file.exists();
 		} catch (Throwable e) {
 		}
 		return false;
+	}
+
+	@Override
+	public List<String> listFiles(String prefix, String dirPath) {
+		try {
+			File file = new File(basePath + prefix + "/" + dirPath);
+			return Arrays.stream(file.list()).collect(Collectors.toList());
+		} catch (Throwable e) {
+		}
+		return new ArrayList<>();
 	}
 
 }

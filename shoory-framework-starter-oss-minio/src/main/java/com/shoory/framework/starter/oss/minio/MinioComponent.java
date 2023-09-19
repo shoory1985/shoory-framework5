@@ -8,10 +8,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.xmlpull.v1.XmlPullParserException;
 
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class MinioComponent implements OssComponent {
@@ -66,6 +69,26 @@ public class MinioComponent implements OssComponent {
 			e.printStackTrace();
 		}
 		return false;
+	}
+
+	@Override
+	public List<String> listFiles(String bucketName, String dirPath) {
+		List<String> files = new ArrayList<>();
+		try {
+			client.listObjects(bucketName, dirPath, false)
+					.forEach(itemResult -> {
+						try {
+							files.add(itemResult.get().objectName());
+						} catch (Throwable e) {
+							e.printStackTrace();
+						}
+					});
+		} catch (Throwable e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return files;
 	}
 
 }
