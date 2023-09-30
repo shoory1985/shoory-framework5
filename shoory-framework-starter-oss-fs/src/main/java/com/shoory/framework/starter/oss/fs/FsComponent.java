@@ -65,7 +65,7 @@ public class FsComponent implements OssComponent {
 		try {
 			File file = new File(basePath + prefix + "/" + path);
 
-			return new FileInputStream(file);
+			return file.exists() ? new FileInputStream(file) : null;
 		} catch (Throwable e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
