@@ -43,6 +43,8 @@ public class JwtAspect {
 		//拣出JWT
 		ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
 		String token = attributes.getRequest().getHeader(requirePermission.header());
+		logger.info(requirePermission.header());
+		logger.info(token);
 		if (StringUtils.isBlank(token)) {
 			throw new BizException(AuthorizedResponse.ERROR_ACCESS_TOKEN_MISSED);
 		}
