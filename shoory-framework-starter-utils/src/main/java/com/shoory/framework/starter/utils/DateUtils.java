@@ -41,7 +41,9 @@ public class DateUtils {
 // 			map.put(pattern, sdf = new SimpleDateFormat(pattern));
 // 		}
 // 		return sdf;
-		return new SimpleDateFormat(pattern);
+		SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+		sdf.setTimeZone(TimeZone.getTimeZone("GMT+8"));
+		return sdf;
 	}
 
 	public Date parseDateTime(String str) {
@@ -117,7 +119,7 @@ public class DateUtils {
 
 	/**
 	 * 获取月份的1号零点
-	 * @param adjustMonth ... -1（上月）、0（本月）、1（下月） ...
+	 * @param n ... -1（上月）、0（本月）、1（下月） ...
 	 * @return
 	 */
 	public Date getDiffDate(int n) {
