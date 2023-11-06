@@ -42,9 +42,10 @@ public class FsComponent implements OssComponent {
 
 			//写入文件
 			FileOutputStream os = new FileOutputStream(realPath);
-			byte[] b = new byte[1024];
-			while ((is.read(b)) != -1) {
-				os.write(b);// 写入数据
+			byte[] b = new byte[4096];
+			int len = 0;
+			while ((len = is.read(b)) != -1) {
+				os.write(b, 0, len);// 写入数据	//FIX，修复off-fs/upload整块写入问题
 			}
 			is.close();
 			os.flush();
